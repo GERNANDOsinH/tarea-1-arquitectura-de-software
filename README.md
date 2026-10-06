@@ -3,7 +3,7 @@
 ## Integrantes:
 - Fernando Hernández 202273056-0
 - Martin Muñoz
-- Martin
+- Martin Chacon 202023012-9
 
 ## Instrucciones Ejecución
 

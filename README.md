@@ -27,3 +27,11 @@ uvicorn main:app --reload
 ### Subscriber
 
 ### Publisher
+
+Requiere Docker (RabbitMQ) y Python 3.10+. Detalle en [publisher/README.md](publisher/README.md).
+```bash
+docker compose up -d rabbitmq
+cd publisher
+pip install -r requirements.txt
+python publisher.py --todos
+```

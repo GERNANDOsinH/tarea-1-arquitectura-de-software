@@ -5,10 +5,11 @@
 ## 1. Trade-offs de la arquitectura
 
 **Publish-subscribe con broker (RabbitMQ).**
-- (+) Desacople: el publisher no conoce ni espera a los 5 subscribers; agregar una ciudad no cambia el publisher.
+- (+) Desacople: Tanto el publisher como la API Rest desconocen la cantidad y ubicación del resto de comoponentes del sistema.
 - (+) Con colas durables y mensajes persistentes, un subscriber caído recibe los sismos pendientes al volver.
 - (−) El broker es un punto único de falla y un componente más que operar. En este dominio es relevante (alertas), por lo que en producción se justificaría un clúster/quorum queues.
 - (−) Fanout entrega todo a todos: cada subscriber procesa también sismos que no le interesan. Aceptable aquí (mensajes de ~100 bytes y 5 consumidores). Alternativa: un topic exchange por zona geográfica; se descartó porque el enunciado pide que el filtro lo haga cada subscriber y complicaría el publisher.
+- (-) Inconsistencia: El publisher y la API no tienen una conexión que les permitan sincronizar sus datos, por lo tanto puede ocurrir que existan datos en uno que no esten en el otro lo que provocara una inconsistencia en el sistema.
 
 **Mensaje mínimo + pull del detalle (en vez de push del sismo completo).**
 - (+) Mensajes pequeños y rápidos; el detalle se baja solo cuando interesa (hoy solo una parte de los 5 lo pedirá).

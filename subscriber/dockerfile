@@ -1,0 +1,7 @@
+FROM python:3.10-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY subscriber.py .
+# El flag -u es crucial para que los prints salgan en tiempo real en los logs de Docker
+CMD ["python", "-u", "subscriber.py"]

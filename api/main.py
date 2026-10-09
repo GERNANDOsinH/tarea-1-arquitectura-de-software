@@ -51,13 +51,14 @@ app = FastAPI(lifespan=lifespan)
 
 @app.get("/{id}")
 def get(id: int):
-    if id < 0 or len(DATA) <= id:
+    # Buscar por el atributo ID real
+    elem = next((sismo for sismo in DATA if sismo.id == id), None)
+
+    if not elem:
         return {
             "status": "failure",
             "description": "Ingrese un identificador dentro de un rango válido."
         }
-
-    elem = DATA[id]
 
     return {
         "status": "success",

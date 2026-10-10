@@ -64,11 +64,11 @@ def get(id: int):
         "status": "success",
         "data": {
             "id": elem.id,
-            "magnitude": f"{elem.magnitude:.1f}",
-            "depth": f"{elem.depth:.1f} km",
+            "magnitude": round(elem.magnitude, 1),
+            "depth": round(elem.depth, 1),
             "location": elem.location,
             "datetime": elem.datetime,
-            "latitude": f"{elem.latitude:.1f}",
-            "longitude": f"{elem.longitude:.1f}",
+            "latitude": round(elem.latitude, 1),
+            "longitude": round(elem.longitude, 1),
         }
     }

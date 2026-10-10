@@ -8,7 +8,7 @@ import time
 SUBSCRIBER_NAME = os.getenv("NAME", "Valparaíso")
 SUBSCRIBER_LAT = float(os.getenv("LAT", -33.036))
 SUBSCRIBER_LON = float(os.getenv("LON", -71.62963))
-API_URL = os.getenv("API_URL", "http://host.docker.internal:8000/sismos")
+API_URL = os.getenv("API_URL", "http://host.docker.internal:8000")
 RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "rabbitmq")
 
 def calcular_distancia(lat1, lon1, lat2, lon2):

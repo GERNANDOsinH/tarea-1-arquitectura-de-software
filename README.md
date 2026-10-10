@@ -12,7 +12,7 @@
 ```bash
 cd api
 python -m venv venv
-venv\Scripts\activate          # opcional: aísla las dependencias del resto del sistema
+source .venv/Scripts/activate          # opcional: aísla las dependencias del resto del sistema
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```

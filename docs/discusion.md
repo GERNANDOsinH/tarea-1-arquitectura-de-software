@@ -1,6 +1,4 @@
-# Discusión: trade-offs y Back of the Envelope (BORRADOR)
-
-> Borrador escrito por el publisher; el equipo debe revisarlo y ajustarlo a lo que finalmente implementen.
+# Discusión: trade-offs y Back of the Envelope
 
 ## 1. Trade-offs de la arquitectura
 

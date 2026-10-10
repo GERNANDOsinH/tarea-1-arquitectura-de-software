@@ -13,6 +13,7 @@ En una terminal, encontrándonos en la carpeta raíz:
 python -m venv venv
 docker compose up -d rabbitmq
 
+# Activación de venv en terminal
 venv\Scripts\activate           # Para Windows (cmd/PowerShell)
 source venv/Scripts/activate    # Para Windows con Git Bash
 source venv/bin/activate        # Para Linux/Mac
@@ -26,6 +27,7 @@ uvicorn main:app --reload
 ### 2. Iniciar Subscribers (Ciudades)
 En otra ventana de la terminal, encontrándonos en la carpeta raíz se debe iniciar la escucha de las ciudades:
 ```bash
+# Activación de venv en terminal
 venv\Scripts\activate           # Para Windows (cmd/PowerShell)
 source venv/Scripts/activate    # Para Windows con Git Bash
 source venv/bin/activate        # Para Linux/Mac
@@ -37,6 +39,7 @@ bash iniciar_ciudades.sh        # Para Git Bash / WSL en Windows
 ### 3. Publicar Sismos
 Finalmente (encontrándonos en la carpeta raíz nuevamente), en una tercera ventana de la terminal, para realizar la publicación de los sismos debemos hacer:
 ```bash
+# Activación de venv en terminal
 venv\Scripts\activate           # Para Windows (cmd/PowerShell)
 source venv/Scripts/activate    # Para Windows con Git Bash
 source venv/bin/activate        # Para Linux/Mac

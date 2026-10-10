@@ -7,47 +7,46 @@
 
 ## Instrucciones Ejecución
 
-### API
-
+### 1. Preparación del Entorno y API
+En una terminal, encontrándonos en la carpeta raíz:
 ```bash
-cd api
 python -m venv venv
-venv\Scripts\activate           # Windows (cmd/PowerShell)
-source venv/Scripts/activate    # Windows con Git Bash
-source venv/bin/activate        # Linux/Mac
+docker compose up -d rabbitmq
+
+venv\Scripts\activate           # Para Windows (cmd/PowerShell)
+source venv/Scripts/activate    # Para Windows con Git Bash
+source venv/bin/activate        # Para Linux/Mac
+
 pip install -r requirements.txt
+cd api
 uvicorn main:app --reload
 ```
-La API carga `api/sismos.txt` al arrancar (ruta relativa), por eso `uvicorn` debe ejecutarse estando dentro de `api/`. Queda escuchando en `http://localhost:8000`.
+*Nota: La API carga `api/sismos.txt` al arrancar (ruta relativa), por eso `uvicorn` debe ejecutarse estando dentro de `api/`. Queda escuchando en `http://localhost:8000`.*
 
-### Subscriber
-
-Requiere RabbitMQ (`docker compose up -d rabbitmq`) y la API corriendo (ver arriba).
-
+### 2. Iniciar Subscribers (Ciudades)
+En otra ventana de la terminal, encontrándonos en la carpeta raíz se debe iniciar la escucha de las ciudades:
 ```bash
-cd subscriber
-pip install -r requirements.txt
+venv\Scripts\activate           # Para Windows (cmd/PowerShell)
+source venv/Scripts/activate    # Para Windows con Git Bash
+source venv/bin/activate        # Para Linux/Mac
+
+bash iniciar_ciudades.sh        # Para Git Bash / WSL en Windows
+./iniciar_ciudades.sh           # Para Linux
 ```
 
-Para levantar los 5 subscribers (Arica, Coquimbo, Valparaíso, Concepción, Punta Arenas) con sus coordenadas reales, desde la raíz del repo:
+### 3. Publicar Sismos
+Finalmente (encontrándonos en la carpeta raíz nuevamente), en una tercera ventana de la terminal, para realizar la publicación de los sismos debemos hacer:
 ```bash
-bash iniciar_ciudades.sh    # Git Bash / WSL en Windows
-```
-Para levantar uno solo manualmente (ejemplo Valparaíso), en PowerShell:
-```powershell
-$env:NAME="Valparaíso"; $env:LAT="-33.036"; $env:LON="-71.62963"
-$env:RABBITMQ_HOST="localhost"; $env:API_URL="http://localhost:8000"
-python subscriber.py
-```
+venv\Scripts\activate           # Para Windows (cmd/PowerShell)
+source venv/Scripts/activate    # Para Windows con Git Bash
+source venv/bin/activate        # Para Linux/Mac
 
-### Publisher
-
-Requiere Docker (RabbitMQ) y Python 3.10+. Detalle en [publisher/README.md](publisher/README.md).
-```bash
-docker compose up -d rabbitmq
 cd publisher
-pip install -r requirements.txt
-python publisher.py --todos
+python publisher.py --todos     # esta linea lee todos los sismos que se encuentran en api/sismos.txt
+```
+En caso de solo leer un sismo en particular se puede usar (esto se puede leer en profundidad en el README dentro del directorio publisher):
+```bash
+python publisher.py --id 2      # esta linea solamente lee el sismo con id 2
 ```
 
 ## Consideraciones de la implementación

@@ -29,7 +29,7 @@ def callback(ch, method, properties, body):
 
     if distancia < 500:
         # Aviso inmediato de recepción y cálculo
-        print(f" ***** [{SUBSCRIBER_NAME}] Sismo detectado, [ID: {sismo_id}] (Distancia: {distancia:.1f} km)")
+        print(f" ***** [{SUBSCRIBER_NAME}] Sismo detectado, [ID del sismo: {sismo_id}] (Distancia: {distancia:.1f} km)")
         
         try:
             respuesta = requests.get(f"{API_URL}/{sismo_id}")
@@ -43,7 +43,7 @@ def callback(ch, method, properties, body):
                     ubicacion = datos.get("location", "N/A")
                     
                     # Aviso de detalles repitiendo el contexto (ID y Ciudad)
-                    print(f"[{SUBSCRIBER_NAME}] +++++ Detalles sismo [id: {sismo_id}] detectado en {SUBSCRIBER_NAME} -> Mag: {mag} | Prof: {prof} | Origen: {ubicacion}")
+                    print(f"[{SUBSCRIBER_NAME}] +++++ Detalles sismo [ID del sismo: {sismo_id}] detectado en {SUBSCRIBER_NAME} -> Mag: {mag} | Profundidad: {prof} [km] | Origen: {ubicacion}")
                 else:
                     print(f"[{SUBSCRIBER_NAME}] Detalles sismo id: {sismo_id} -> Error API: {json_resp.get('description')}")
             else:
@@ -53,7 +53,7 @@ def callback(ch, method, properties, body):
             
     else:
         # Línea para los sismos ignorados
-        print(f" ----- [{SUBSCRIBER_NAME}] Sismo id: {sismo_id} ignorado")
+        print(f" ----- [{SUBSCRIBER_NAME}] [Sismo ID]: {sismo_id} ignorado")
         
 
 
